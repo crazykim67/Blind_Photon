@@ -6,6 +6,38 @@ using Photon.Realtime;
 
 public class DummyNetworkManager : MonoBehaviourPunCallbacks
 {
+    #region Instance
+
+    private static DummyNetworkManager instance;
+
+    public static DummyNetworkManager Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = new DummyNetworkManager();
+                return instance;
+            }
+            return instance;
+        }
+    }
+
+    #endregion
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+            Destroy(this.gameObject);
+
+        OnConnect();
+    }
+
     #region Connect & Disconnect
 
     public void OnConnect()
