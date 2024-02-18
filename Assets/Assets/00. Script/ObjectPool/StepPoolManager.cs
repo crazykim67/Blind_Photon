@@ -32,7 +32,7 @@ public class StepPoolManager : MonoBehaviour
     private GameObject rightStep;
 
     [Header("Player")]
-    [SerializeField]
+    [SerializeField] 
     private Transform playerTr;
     private Queue<Step> stepQueue = new Queue<Step>();
     private int stepIndex = 0;

@@ -8,7 +8,7 @@ using Fusion;
 public class HostUI : MonoBehaviour
 {
     [SerializeField]
-    private Button hostBackBtn;
+    private Button hostBackBtn; 
     [SerializeField]
     private TextMeshProUGUI countText;
     [SerializeField]
