@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun;
 using TMPro;
+using Fusion;
 
 public class HostUI : MonoBehaviour
 {
@@ -38,10 +38,5 @@ public class HostUI : MonoBehaviour
     {
         playerCount = Mathf.Clamp(playerCount + (isPlus ? 1 : -1), 1, 4);
         countText.text = playerCount.ToString();
-    }
-
-    public void OnCreate()
-    {
-        DummyNetworkManager.Instance.OnCreate(playerCount);
     }
 }
