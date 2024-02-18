@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Assets/08. Scenes/VEND_stage_test/VEND_stage.unity
-    guid: e7d3427f14797e749aca3ad4d0f5a805
+    path: Assets/Assets/08. Scenes/MainMenu.unity
+    guid: 7ecdb8bae92d2df4b827e0bf5bab4ce9
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

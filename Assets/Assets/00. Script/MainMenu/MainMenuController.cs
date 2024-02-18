@@ -40,17 +40,9 @@ public class MainMenuController : MonoBehaviour
 
     [Header("Host UI Group")]
     [SerializeField]
-    private GameObject hostGroup;
+    private HostUI hostUI;
     [SerializeField]
     private Button hostBackBtn;
-    [SerializeField]
-    private Button decreaseBtn;
-    [SerializeField]
-    private Button increaseBtn;
-    [SerializeField]
-    private TextMeshProUGUI countText;
-    [SerializeField]
-    private int playerCount = 2;
 
     [Header("Join UI Group")]
     [SerializeField]
@@ -64,7 +56,7 @@ public class MainMenuController : MonoBehaviour
 
     [Header("Exit Group")]
     [SerializeField]
-    private GameObject exitGroup;
+    private GameObject exitGroup; 
     [SerializeField]
     private Button exitYesBtn;
     [SerializeField]
@@ -109,16 +101,15 @@ public class MainMenuController : MonoBehaviour
                 {
                     mainGroup.SetActive(false);
                     hostJoinGroup.SetActive(true);
-                    hostGroup.SetActive(false);
+                    hostUI.SetActive(false);
                     joinGroup.SetActive(false);
                     break;
                 }
             case State.Host:
                 {
                     hostJoinGroup.SetActive(false);
-                    hostGroup.SetActive(true);
+                    hostUI.SetActive(true);
 
-                    PlayerCountInit();
                     break;
                 }
             case State.Join:
@@ -131,22 +122,6 @@ public class MainMenuController : MonoBehaviour
                 }
         } 
     }
-
-    #region PlayerCount
-
-    private void PlayerCountInit()
-    {
-        playerCount = 2;
-        countText.text = playerCount.ToString();
-    }
-
-    public void OnPlayerCountChanged(bool isPlus)
-    {
-        playerCount = Mathf.Clamp(playerCount + (isPlus ? 1 : -1), 1, 4);
-        countText.text = playerCount.ToString();
-    }
-
-    #endregion
 
     #region Join
 
