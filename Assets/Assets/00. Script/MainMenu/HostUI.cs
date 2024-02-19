@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Fusion;
-
 public class HostUI : MonoBehaviour
 {
     [SerializeField]
@@ -22,7 +20,7 @@ public class HostUI : MonoBehaviour
         this.gameObject.SetActive(isAct);
         Init();
     }
-
+     
     public void Init()
     {
         PlayerCountInit();
@@ -38,5 +36,10 @@ public class HostUI : MonoBehaviour
     {
         playerCount = Mathf.Clamp(playerCount + (isPlus ? 1 : -1), 1, 4);
         countText.text = playerCount.ToString();
+    }
+
+    public void OnCreate()
+    {
+
     }
 }

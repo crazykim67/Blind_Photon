@@ -5,8 +5,7 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public float sensitivity = 100f;
-    [SerializeField]
-    private Transform body;
+    public Transform body;
     private float xRotation = 0f;
 
     [SerializeField]
@@ -21,6 +20,9 @@ public class CameraMovement : MonoBehaviour
 
     private void LookAt()
     {
+        if (body == null)
+            return;
+
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 

@@ -46,11 +46,7 @@ public class MainMenuController : MonoBehaviour
 
     [Header("Join UI Group")]
     [SerializeField]
-    private GameObject joinGroup;
-    [SerializeField]
-    private TMP_InputField codeInputField;
-    [SerializeField]
-    private Button roomJoinBtn;
+    private JoinUI joinUI;
     [SerializeField]
     private Button joinBackBtn;
 
@@ -102,7 +98,7 @@ public class MainMenuController : MonoBehaviour
                     mainGroup.SetActive(false);
                     hostJoinGroup.SetActive(true);
                     hostUI.SetActive(false);
-                    joinGroup.SetActive(false);
+                    joinUI.SetActive(false);
                     break;
                 }
             case State.Host:
@@ -115,20 +111,9 @@ public class MainMenuController : MonoBehaviour
             case State.Join:
                 {
                     hostJoinGroup.SetActive(false);
-                    joinGroup.SetActive(true);
-
-                    JoinInit();
+                    joinUI.SetActive(true);
                     break;
                 }
         } 
     }
-
-    #region Join
-
-    private void JoinInit()
-    {
-        codeInputField.text = "";
-    }
-
-    #endregion
 }

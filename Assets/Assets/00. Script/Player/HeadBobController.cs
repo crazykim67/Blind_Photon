@@ -33,10 +33,20 @@ public class HeadBobController : MonoBehaviour
     [SerializeField]
     private float tolerance = 0.001f;
 
+    [SerializeField]
+    private CameraMovement camMovement;
+
     private void Awake()
     {
         ch = GetComponent<CharacterController>();
-        startPos = camTr.localPosition;
+
+        camTr = Camera.main.transform;
+        camMovement = camTr.GetComponent<CameraMovement>();
+        camMovement.body = this.transform;
+        startPos = new Vector3(0, 0.5f, 0);
+
+        camTr.SetParent(camHolder);
+        camTr.localPosition = startPos;
     }
 
     private void Update()
