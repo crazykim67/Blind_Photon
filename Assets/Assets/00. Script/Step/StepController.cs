@@ -22,10 +22,10 @@ public class StepController : MonoBehaviour
 
     #region Player
 
-    public void OnStep(Vector3 pos, Quaternion rot)
+    public void OnStep(Vector3 pos, Quaternion rot, int index)
     {
         OnStepSound();
-        StepPoolManager.Instance.GetStep(pos, rot);
+        StepPoolManager.Instance.GetStep(pos, rot, index);
     }
 
     #endregion

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
@@ -37,6 +38,8 @@ public class HeadBobController : MonoBehaviour
 
     [SerializeField]
     private CameraMovement camMovement;
+
+    private int index = 0;
 
     private void Awake()
     {
@@ -93,8 +96,14 @@ public class HeadBobController : MonoBehaviour
 
             Vector3 pos = playerTr.position;
             Quaternion rot = playerTr.rotation;
+
+            if (index == 0)
+                index = 1;
+            else
+                index = 0;
+
             //stepController.OnStep();
-            pv.RPC("OnStep", RpcTarget.All, pos, rot);
+            pv.RPC("OnStep", RpcTarget.All, pos, rot, index);
         }
     }
 
@@ -131,9 +140,9 @@ public class HeadBobController : MonoBehaviour
     #region RPC
 
     [PunRPC]
-    private void OnStep(Vector3 pos, Quaternion rot)
+    private void OnStep(Vector3 pos, Quaternion rot, int index)
     {
-        stepController.OnStep(pos, rot);
+        stepController.OnStep(pos, rot, index);
     }
 
     #endregion

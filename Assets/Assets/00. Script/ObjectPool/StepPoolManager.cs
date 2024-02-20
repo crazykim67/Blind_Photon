@@ -48,7 +48,7 @@ public class StepPoolManager : MonoBehaviour
     {
         instance = this;
 
-        Initialize(10);
+        Initialize(50);
         EnemyInitialize(10 * enemies.Count);
 
         //playerTr = FindFirstObjectByType<PlayerController>().GetComponent<Transform>();
@@ -90,14 +90,40 @@ public class StepPoolManager : MonoBehaviour
         return step;
     }
 
-    public Step GetStep(Vector3 pos, Quaternion rot)
+    public Step GetStep(Vector3 pos, Quaternion rot, int index)
     {
         //Vector3 pos = playerTr.position;
         //Quaternion rot = playerTr.rotation;
-
         if (stepQueue.Count > 0)
         {
             var step = stepQueue.Dequeue();
+
+            if (index == 0)
+            {
+                while(step.stepPos != StepPos.Left)
+                {
+                    stepQueue.Enqueue(step);
+
+                    step = stepQueue.Dequeue();
+
+                    if (step.stepPos == StepPos.Left)
+                        break;
+                }
+            }
+            else
+            {
+                while (step.stepPos != StepPos.Right)
+                {
+                    stepQueue.Enqueue(step);
+
+                    step = stepQueue.Dequeue();
+
+                    if (step.stepPos == StepPos.Right)
+                        break;
+                }
+            }
+
+
             step.transform.SetParent(null);
             step.transform.position = new Vector3(pos.x, pos.y - 1f, pos.z);
             step.transform.rotation = rot;

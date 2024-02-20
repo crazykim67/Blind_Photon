@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum StepPos
+{
+    Left,
+    Right,
+}
+
 public enum StepType
 {
     Player,
@@ -10,6 +16,8 @@ public enum StepType
 
 public abstract class Step : MonoBehaviour
 {
+    public StepPos stepPos = StepPos.Left;
+
     public StepType stepType;
 
     public SpriteRenderer ren;
