@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class OptionManager : MonoBehaviour
@@ -34,5 +35,15 @@ public class OptionManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+    }
+
+    public void OnShow()
+    {
+        
+    }
+
+    public void OnHide()
+    {
+
     }
 }
