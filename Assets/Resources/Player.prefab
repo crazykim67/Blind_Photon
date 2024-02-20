@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8326965685727643712}
   - component: {fileID: 8458923514097267739}
   - component: {fileID: 5622518125528099478}
-  - component: {fileID: 7955712074007929791}
+  - component: {fileID: 138595241977786056}
   - component: {fileID: 4514814797944730688}
   - component: {fileID: 2281794064014059037}
   m_Layer: 0
@@ -139,7 +139,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7955712074007929791
+--- !u!114 &138595241977786056
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,12 +148,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2783787156068357321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ba55248ae86364b86740c73573db3f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9625e70282b68644da34676b652a4a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pv: {fileID: 5622518125528099478}
+  ch: {fileID: 8458923514097267739}
   speed: 1
   gravity: -9.8
   moveDir: {x: 0, y: 0, z: 0}
+  nickName: 
 --- !u!114 &4514814797944730688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 742ed8b0884dbca49b45d2f23cc6dd24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 7955712074007929791}
+  controller: {fileID: 138595241977786056}
   stepController: {fileID: 6000695339248587650}
   enable: 1
   amplitude: 0.003
@@ -334,6 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a2c4ef1de834d4c8846af826f74d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pv: {fileID: 5622518125528099478}
   clips:
   - {fileID: 8300000, guid: c65e0edae56631349a74cfe82c6a6a13, type: 3}
   - {fileID: 8300000, guid: ec919657df1d3284a9db6687db7d1d49, type: 3}

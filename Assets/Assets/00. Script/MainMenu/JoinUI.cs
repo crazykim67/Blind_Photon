@@ -25,5 +25,6 @@ public class JoinUI : MonoBehaviour
         if (codeInputField.text.Length != 5 || string.IsNullOrEmpty(codeInputField.text)) 
             return;
 
+        PhotonManager.Instance.OnJoinRoom(codeInputField.text);
     }
 }

@@ -78,7 +78,6 @@ public class MainMenuController : MonoBehaviour
 #else
             Application.Quit(); 
 #endif
-        
         });
         exitNoBtn.onClick.AddListener(() => { exitGroup.SetActive(false); });
     }

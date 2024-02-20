@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
+
 public class HostUI : MonoBehaviour
 {
     [SerializeField]
@@ -40,6 +42,6 @@ public class HostUI : MonoBehaviour
 
     public void OnCreate()
     {
-
+        PhotonManager.Instance.OnCreateRoom(playerCount);
     }
 }

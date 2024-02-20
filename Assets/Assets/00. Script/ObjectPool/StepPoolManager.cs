@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class StepPoolManager : MonoBehaviour
@@ -14,10 +15,7 @@ public class StepPoolManager : MonoBehaviour
         get
         {
             if(instance == null)
-            {
                 instance = new StepPoolManager();
-                return instance;
-            }
 
             return instance;
         }
@@ -32,8 +30,8 @@ public class StepPoolManager : MonoBehaviour
     private GameObject rightStep;
 
     [Header("Player")]
-    [SerializeField] 
-    private Transform playerTr;
+    //[HideInInspector] 
+    public Transform playerTr;
     private Queue<Step> stepQueue = new Queue<Step>();
     private int stepIndex = 0;
 
@@ -48,20 +46,20 @@ public class StepPoolManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null) 
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-            Destroy(this.gameObject);
+        instance = this;
 
         Initialize(10);
         EnemyInitialize(10 * enemies.Count);
-        playerTr = FindFirstObjectByType<PlayerController>().GetComponent<Transform>();
+
+        //playerTr = FindFirstObjectByType<PlayerController>().GetComponent<Transform>();
     }
 
     #region Player
+
+    public void SetTransform(Transform punTr)
+    {
+        playerTr = punTr;
+    }
 
     private void Initialize(int initCount)
     {

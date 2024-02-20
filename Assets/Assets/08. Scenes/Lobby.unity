@@ -322,7 +322,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 26.065}
+  m_AnchoredPosition: {x: -10, y: 30}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1166604579
@@ -1980,10 +1980,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1888413353}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17362ecd658f67e41bec18b351addb4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 469421fe94881aa408216df75afc995b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomCode: {fileID: 1166604580}
+  roomCodeText: {fileID: 1166604580}
 --- !u!114 &308799110143498072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2042,6 +2042,38 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1942138924745937248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4897806127803763748}
+  - component: {fileID: 7471414698929027276}
+  m_Layer: 0
+  m_Name: StepPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3318326498121150961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6951833325346505813}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4897806127803763748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3631320829300940159
 MonoBehaviour:
@@ -2140,6 +2172,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4897806127803763748
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942138924745937248}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3318326498121150961}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &5488844247488343698
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2148,6 +2196,39 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3844402079603779587}
   m_Enabled: 1
+--- !u!1 &6951833325346505813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3318326498121150961}
+  m_Layer: 0
+  m_Name: EnemyStepPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &7471414698929027276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942138924745937248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bed7f94323501442913ab508dd58309, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftStep: {fileID: 322513287373335263, guid: 329accdfd756159409b0ba8703094f13, type: 3}
+  rightStep: {fileID: 1173669875665221716, guid: eab172e98033a4647be3021d7d07b3d0, type: 3}
+  playerTr: {fileID: 0}
+  enemies: []
+  enemyTr: {fileID: 3318326498121150961}
 --- !u!20 &8115078994363649992
 Camera:
   m_ObjectHideFlags: 0
@@ -2209,3 +2290,4 @@ SceneRoots:
   - {fileID: 1066273659}
   - {fileID: 1888413357}
   - {fileID: 1421953508397001857}
+  - {fileID: 4897806127803763748}

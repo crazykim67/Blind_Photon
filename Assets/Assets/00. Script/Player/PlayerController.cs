@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    private CharacterController ch;
+    public PhotonView pv;
+    public CharacterController ch;
 
     public float speed = 5f;
     public float gravity = -9.8f; 
@@ -19,13 +21,16 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         ch = GetComponent<CharacterController>();
+        pv = GetComponent<PhotonView>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
     }
 
     private void Update()
     {
+        if (!pv.IsMine)
+            return;
+
         Move();
     }
 

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class HeadBobController : MonoBehaviour
 {
+    private PhotonView pv;
     [SerializeField]
     private PlayerController controller;
     [SerializeField]
@@ -39,6 +41,10 @@ public class HeadBobController : MonoBehaviour
     private void Awake()
     {
         ch = GetComponent<CharacterController>();
+        pv = GetComponent<PhotonView>();
+
+        if (!pv.IsMine)
+            return;
 
         camTr = Camera.main.transform;
         camMovement = camTr.GetComponent<CameraMovement>();
@@ -52,6 +58,9 @@ public class HeadBobController : MonoBehaviour
     private void Update()
     {
         if (!enable)
+            return;
+
+        if (!pv.IsMine)
             return;
 
         CheckMotion();
@@ -78,7 +87,7 @@ public class HeadBobController : MonoBehaviour
     {
         camTr.localPosition += motion;
 
-        if(Mathf.Abs(camTr.localPosition.x - startPos.x) < tolerance)
+        if (Mathf.Abs(camTr.localPosition.x - startPos.x) < tolerance)
             stepController.OnStep();
     }
 

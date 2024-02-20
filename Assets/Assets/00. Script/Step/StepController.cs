@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class StepController : MonoBehaviour
 {
+    public PhotonView pv;
+
     private AudioSource ad;
 
     [SerializeField]
