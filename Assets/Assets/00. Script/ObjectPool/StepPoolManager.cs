@@ -56,10 +56,10 @@ public class StepPoolManager : MonoBehaviour
 
     #region Player
 
-    public void SetTransform(Transform punTr)
-    {
-        playerTr = punTr;
-    }
+    //public void SetTransform(Transform punTr)
+    //{
+    //    playerTr = punTr;
+    //}
 
     private void Initialize(int initCount)
     {
@@ -90,10 +90,10 @@ public class StepPoolManager : MonoBehaviour
         return step;
     }
 
-    public Step GetStep()
+    public Step GetStep(Vector3 pos, Quaternion rot)
     {
-        Vector3 pos = playerTr.position;
-        Quaternion rot = playerTr.rotation;
+        //Vector3 pos = playerTr.position;
+        //Quaternion rot = playerTr.rotation;
 
         if (stepQueue.Count > 0)
         {

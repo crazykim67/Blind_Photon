@@ -14,7 +14,7 @@ public class PlayerPun : PlayerController
             pv.RPC("SetNickName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
             pv.RPC("SetController", RpcTarget.AllBufferedViaServer);
 
-            StepPoolManager.Instance.SetTransform(this.transform);
+            //StepPoolManager.Instance.SetTransform(this.transform);
         }
     }
 

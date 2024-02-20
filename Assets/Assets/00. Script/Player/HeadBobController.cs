@@ -88,7 +88,14 @@ public class HeadBobController : MonoBehaviour
         camTr.localPosition += motion;
 
         if (Mathf.Abs(camTr.localPosition.x - startPos.x) < tolerance)
-            stepController.OnStep();
+        {
+            Transform playerTr = controller.transform;
+
+            Vector3 pos = playerTr.position;
+            Quaternion rot = playerTr.rotation;
+            //stepController.OnStep();
+            pv.RPC("OnStep", RpcTarget.All, pos, rot);
+        }
     }
 
     // 플레이어의 움직임을 확인하고, 일정 속도 이상일 때만 헤드 밥 효과를 적용하는 메서드
@@ -120,4 +127,14 @@ public class HeadBobController : MonoBehaviour
         pos += camHolder.forward * 15.0f;
         return pos;
     }
+
+    #region RPC
+
+    [PunRPC]
+    private void OnStep(Vector3 pos, Quaternion rot)
+    {
+        stepController.OnStep(pos, rot);
+    }
+
+    #endregion
 }
