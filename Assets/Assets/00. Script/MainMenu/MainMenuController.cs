@@ -70,6 +70,8 @@ public class MainMenuController : MonoBehaviour
         joinBtn.onClick.AddListener(() => { OnChange(State.Join); });
         joinBackBtn.onClick.AddListener(() => { OnChange(State.HostandJoin); });
 
+        optionBtn.onClick.AddListener(() => { OptionManager.Instance.OnShow(); });
+
         exitBtn.onClick.AddListener(() => { exitGroup.SetActive(true); });
         exitYesBtn.onClick.AddListener(() => 
         {
