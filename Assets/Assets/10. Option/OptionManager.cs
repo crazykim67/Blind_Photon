@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using System.Linq;
 
 public class OptionManager : MonoBehaviour
 {
@@ -27,13 +28,16 @@ public class OptionManager : MonoBehaviour
     }
 
     #endregion
+
     public GameObject optionGO;
 
     [Header("Rsolution")]
+    private FullScreenMode screenMode;
     [SerializeField]
     private TMP_Dropdown resolutionDropdown;
     [SerializeField]
-    private TMP_Dropdown rateDropdown;
+    private Toggle screenToggle;
+    private int resolutionNum;
 
     private List<Resolution> resolutions = new List<Resolution>();
 
@@ -50,8 +54,8 @@ public class OptionManager : MonoBehaviour
 
     public void OnShow()
     {
-        Init();
-        OnValueChanged(resolutionDropdown.value);
+        InitUI();
+        //OnValueChanged(resolutionDropdown.value);
     }
 
     public void OnHide()
@@ -59,53 +63,49 @@ public class OptionManager : MonoBehaviour
         optionGO.SetActive(false);
     }
 
-    private void Init()
+    private void InitUI()
     {
+        int optionNum = 0;
+
         resolutions.Clear();
-        resolutionDropdown.ClearOptions();
+        resolutionDropdown.options.Clear();
 
-        optionGO.SetActive(true);
+        for(int i = 0; i < Screen.resolutions.Length; i++)
+            if(Screen.currentResolution.refreshRateRatio.value == Screen.resolutions[i].refreshRateRatio.value)
+                resolutions.Add(Screen.resolutions[i]);
 
-        resolutions.AddRange(Screen.resolutions);
-
-        int i = 0;
-
-        foreach (Resolution item in resolutions)
+        foreach(var item in resolutions)
         {
             TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
-
-            option.text = $"{item.width} x {item.height}";
-
-            if (i != 0 && resolutionDropdown.options[i-1] != null)
-                if (resolutionDropdown.options[i-1].text.Equals(option.text))
-                    continue;
-
+            option.text = $"{item.width} x {item.height} {Mathf.Round((float)item.refreshRateRatio.value)} Hz";
             resolutionDropdown.options.Add(option);
-            i++;
+
+            if (item.width == Screen.width && item.height == Screen.height)
+                resolutionDropdown.value = optionNum;
+
+            optionNum++;
         }
+
+        screenToggle.isOn = Screen.fullScreenMode.Equals(FullScreenMode.FullScreenWindow) ? true : false;
+        FullScreenBtn(screenToggle.isOn);
+        optionGO.SetActive(true);
 
         resolutionDropdown.RefreshShownValue();
     }
 
     public void OnValueChanged(Int32 val)
     {
-        rateDropdown.ClearOptions();
-
-        TMP_Dropdown.OptionData option = new TMP_Dropdown.OptionData();
-        string currentResoultion = resolutionDropdown.options[resolutionDropdown.value].text;
-
-        foreach (Resolution item in resolutions)
-        {
-            string str = $"{item.width} x {item.height}";
-
-            if (currentResoultion.Equals(str))
-            {
-                option.text = $"{Mathf.Round((float)item.refreshRateRatio.value)} hz";
-                rateDropdown.options.Add(option);
-            }
-        }
-
-        rateDropdown.RefreshShownValue();
+        resolutionNum = val;
     }
 
+    public void FullScreenBtn(bool isFull)
+    {
+        screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
+    }
+
+    public void OnConfirm()
+    {
+        Screen.SetResolution(resolutions[resolutionNum].width, resolutions[resolutionNum].height, screenMode);
+        OnHide();
+    }
 }
