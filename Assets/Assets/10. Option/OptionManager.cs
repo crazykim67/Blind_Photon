@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using static UnityEditor.Progress;
 using System;
 
 public class OptionManager : MonoBehaviour
