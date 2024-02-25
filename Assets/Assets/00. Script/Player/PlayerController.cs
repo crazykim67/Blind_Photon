@@ -20,8 +20,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float moveX, moveZ;
-    [SerializeField]
-    private float lerpT = 0.2f;
 
     //[Header("Input Action")]
     //private Controls input = null;

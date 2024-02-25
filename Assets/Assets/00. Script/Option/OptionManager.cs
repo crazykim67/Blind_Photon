@@ -41,6 +41,7 @@ public class OptionManager : MonoBehaviour
 
     private List<Resolution> resolutions = new List<Resolution>();
 
+    [Header("Buttons")]
     [SerializeField]
     private Button confirmBtn;
     [SerializeField]
@@ -58,6 +59,17 @@ public class OptionManager : MonoBehaviour
     private float bgVal = 1;
     private float sfxVal = 1;
 
+    [Header("Mouse")]
+    [SerializeField]
+    private Slider sensSlider;
+    [SerializeField]
+    private TextMeshProUGUI sensitivity;
+    [SerializeField]
+    private float mouseSen;
+    [SerializeField]
+    private float fixedSen;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -67,6 +79,8 @@ public class OptionManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+
+        #region Sound
 
         if (PlayerPrefs.HasKey("Master"))
             masterVal = PlayerPrefs.GetFloat("Master");
@@ -87,6 +101,8 @@ public class OptionManager : MonoBehaviour
             return;
 
         SoundManager.Instance.SetVolume(PlayerPrefs.GetFloat("Master"), PlayerPrefs.GetFloat("BG"), PlayerPrefs.GetFloat("SFX"));
+        
+        #endregion
     }
 
     private void Start()
@@ -158,6 +174,17 @@ public class OptionManager : MonoBehaviour
         InputKeyManager.Instance.OnConfirm();
 
         #endregion
+
+        #region Mouse
+
+        if (PlayerPrefs.HasKey("MouseSensitivity"))
+            mouseSen = PlayerPrefs.GetFloat("MouseSensitivity");
+        else
+            mouseSen = fixedSen = 0.5f;
+
+        sensSlider.value = mouseSen;
+
+        #endregion
     }
 
     public void OnValueChanged(Int32 val)
@@ -170,6 +197,16 @@ public class OptionManager : MonoBehaviour
         screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
     }
 
+    #region Mouse
+
+    public void OnSensitivityChanged(float val)
+    {
+        sensitivity.text = Mathf.RoundToInt(val * 100).ToString();
+        fixedSen = val;
+    }
+
+    #endregion
+
     public void OnConfirm()
     {
         Screen.SetResolution(resolutions[resolutionNum].width, resolutions[resolutionNum].height, screenMode);
@@ -180,6 +217,9 @@ public class OptionManager : MonoBehaviour
         SoundManager.Instance.VolumeConfirm();
 
         InputKeyManager.Instance.OnConfirm();
+
+        PlayerPrefs.SetFloat("MouseSensitivity", fixedSen);
+        mouseSen = fixedSen;
 
         OnHide();
     }
@@ -193,6 +233,12 @@ public class OptionManager : MonoBehaviour
 
         InputKeyManager.Instance.OnCancel();
 
+        if (PlayerPrefs.HasKey("MouseSensitivity"))
+            mouseSen = fixedSen = PlayerPrefs.GetFloat("MouseSensitivity");
+        else
+            mouseSen = fixedSen = 0.5f;
+
+        sensSlider.value = mouseSen;
         OnHide();
     }
 }
