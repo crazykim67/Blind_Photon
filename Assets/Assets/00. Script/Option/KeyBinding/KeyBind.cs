@@ -12,7 +12,6 @@ public class KeyBind : MonoBehaviour
     public KeyCode currentKey;
     public KeyCode initKey;
 
-    private bool isChange = false;
 
     private void Awake()
     {
@@ -29,18 +28,28 @@ public class KeyBind : MonoBehaviour
     {
         if (buttonLabel.text == "[Awaiting Input]")
             foreach(KeyCode code in Enum.GetValues(typeof(KeyCode)))
+            {
                 if (Input.GetKey(code))
                 {
+                    if (!InputKeyManager.Instance.OnSameKey(this, code))
+                        return;
+
                     buttonLabel.text = code.ToString();
 
                     currentKey = code;
+                    InputKeyManager.Instance.IsChange = false;
                 }
+            }
     }
 
     public void ChangeKey()
     {
+        if (InputKeyManager.Instance.IsChange)
+            return;
+
+        InputKeyManager.Instance.IsChange = true;
+
         buttonLabel.text = "[Awaiting Input]";
-        isChange = true;
     }
 
     public void OnConfirm()
