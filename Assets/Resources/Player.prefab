@@ -160,7 +160,6 @@ MonoBehaviour:
   moveDir: {x: 0, y: 0, z: 0}
   moveX: 0
   moveZ: 0
-  lerpT: 0.2
   nickName: 
 --- !u!114 &4514814797944730688
 MonoBehaviour:

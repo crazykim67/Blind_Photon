@@ -31,23 +31,23 @@ public class KeyBind : MonoBehaviour
             {
                 if (Input.GetKey(code))
                 {
-                    if (!InputKeyManager.Instance.OnSameKey(this, code))
+                    if (!OptionManager.Instance.keyManager.OnSameKey(this, code))
                         return;
 
                     buttonLabel.text = code.ToString();
 
                     currentKey = code;
-                    InputKeyManager.Instance.IsChange = false;
+                    OptionManager.Instance.keyManager.isChange = false;
                 }
             }
     }
 
     public void ChangeKey()
     {
-        if (InputKeyManager.Instance.IsChange)
+        if (OptionManager.Instance.keyManager.isChange)
             return;
 
-        InputKeyManager.Instance.IsChange = true;
+        OptionManager.Instance.keyManager.isChange = true;
 
         buttonLabel.text = "[Awaiting Input]";
     }

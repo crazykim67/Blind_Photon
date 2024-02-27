@@ -69,6 +69,12 @@ public class OptionManager : MonoBehaviour
     [SerializeField]
     private float fixedSen;
 
+    private bool isOption = false;
+
+    [Header("InputKeyManager")]
+    public InputKeyManager keyManager;
+
+    public bool IsOption { get { return isOption; } }
 
     private void Awake()
     {
@@ -116,11 +122,13 @@ public class OptionManager : MonoBehaviour
     public void OnShow()
     {
         InitUI();
+        isOption = true;
     }
 
     public void OnHide()
     {
         optionGO.SetActive(false);
+        isOption = false;
     }
 
     #endregion
@@ -171,7 +179,7 @@ public class OptionManager : MonoBehaviour
 
         #region Key Setting
 
-        InputKeyManager.Instance.OnConfirm();
+        keyManager.OnConfirm();
 
         #endregion
 
@@ -216,7 +224,7 @@ public class OptionManager : MonoBehaviour
 
         SoundManager.Instance.VolumeConfirm();
 
-        InputKeyManager.Instance.OnConfirm();
+        OptionManager.Instance.keyManager.OnConfirm();
 
         PlayerPrefs.SetFloat("MouseSensitivity", fixedSen);
         mouseSen = fixedSen;
@@ -231,7 +239,7 @@ public class OptionManager : MonoBehaviour
 
         SoundManager.Instance.VolumeCancel();
 
-        InputKeyManager.Instance.OnCancel();
+        OptionManager.Instance.keyManager.OnCancel();
 
         if (PlayerPrefs.HasKey("MouseSensitivity"))
             mouseSen = fixedSen = PlayerPrefs.GetFloat("MouseSensitivity");

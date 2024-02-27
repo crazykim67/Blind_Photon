@@ -98,6 +98,19 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName);
     }
 
+    public void OnLeaveRoom()
+    {
+        if (!PhotonNetwork.InRoom)
+            return;
+
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        OnLoadScene("MainMenu");
+    }
+
     #region Dummy
 
     private string NickName()

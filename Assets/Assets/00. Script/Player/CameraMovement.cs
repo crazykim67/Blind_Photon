@@ -6,6 +6,7 @@ public class CameraMovement : MonoBehaviour
 {
     public float sensitivity = 100f;
     public Transform body;
+    [SerializeField]
     private float xRotation = 0f;
 
     [SerializeField]
@@ -13,8 +14,22 @@ public class CameraMovement : MonoBehaviour
     [SerializeField]
     private float maxClamp = 90f;
 
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("MouseSensitivity"))
+            sensitivity = Mathf.RoundToInt(PlayerPrefs.GetFloat("MouseSensitivity") * 100);
+        else
+            sensitivity = 50f;
+    }
+
     private void LateUpdate()
     {
+        if (InGameMenu.Instance.IsMenu)
+        {
+            transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+            return;
+        }
+
         LookAt();
     }
 

@@ -88,4 +88,9 @@ public class LobbyController : MonoBehaviourPunCallbacks
     }
 
     #endregion
+
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        PhotonManager.Instance.OnLeaveRoom();
+    }
 }

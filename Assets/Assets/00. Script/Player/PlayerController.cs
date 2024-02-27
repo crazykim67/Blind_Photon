@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!pv.IsMine)
             return;
+
+        if (InGameMenu.Instance.IsMenu)
+        {
+            moveDir = Vector3.zero;
+            moveX = moveZ = 0;
+            return;
+        }
+
         InputKey();
         Move();
     }
@@ -54,24 +62,24 @@ public class PlayerController : MonoBehaviour
 
     private void InputKey()
     {
-        if (Input.GetKey(InputKeyManager.Instance.FORWARD.currentKey))
+        if (Input.GetKey(OptionManager.Instance.keyManager.FORWARD.currentKey))
             moveZ = 1;
-        else if (Input.GetKey(InputKeyManager.Instance.BACK.currentKey))
+        else if (Input.GetKey(OptionManager.Instance.keyManager.BACK.currentKey))
             moveZ = -1;
 
-        if (Input.GetKey(InputKeyManager.Instance.LEFT.currentKey))
+        if (Input.GetKey(OptionManager.Instance.keyManager.LEFT.currentKey))
             moveX = -1;
-        else if (Input.GetKey(InputKeyManager.Instance.RIGHT.currentKey))
+        else if (Input.GetKey(OptionManager.Instance.keyManager.RIGHT.currentKey))
             moveX = 1;
 
-        if (Input.GetKeyUp(InputKeyManager.Instance.FORWARD.currentKey))
+        if (Input.GetKeyUp(OptionManager.Instance.keyManager.FORWARD.currentKey))
             moveZ = 0;
-        else if (Input.GetKeyUp(InputKeyManager.Instance.BACK.currentKey))
+        else if (Input.GetKeyUp(OptionManager.Instance.keyManager.BACK.currentKey))
             moveZ = 0;
 
-        if (Input.GetKeyUp(InputKeyManager.Instance.LEFT.currentKey))
+        if (Input.GetKeyUp(OptionManager.Instance.keyManager.LEFT.currentKey))
             moveX = 0;
-        else if (Input.GetKeyUp(InputKeyManager.Instance.RIGHT.currentKey))
+        else if (Input.GetKeyUp(OptionManager.Instance.keyManager.RIGHT.currentKey))
             moveX = 0;
     }
 
