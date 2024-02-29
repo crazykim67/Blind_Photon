@@ -137,6 +137,27 @@ public class HeadBobController : MonoBehaviour
         return pos;
     }
 
+    public void SetValue(State _state)
+    {
+        switch(_state) 
+        {
+            case State.Walk:
+                {
+                    amplitude = 0.003f;
+                    frequency = 5f;
+                    tolerance = 0.0027f;
+                    break;
+                }
+            case State.Run:
+                {
+                    amplitude = 0.01f;
+                    frequency = 12f;
+                    tolerance = 0.008f;
+                    break;
+                }
+        }
+    }
+
     #region RPC
 
     [PunRPC]

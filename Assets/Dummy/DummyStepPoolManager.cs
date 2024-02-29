@@ -56,7 +56,7 @@ public class DummyStepPoolManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
-        Initialize(10);
+        Initialize(100);
         EnemyInitialize(10 * enemies.Count);
         playerTr = FindFirstObjectByType<DummyPlayerController>().GetComponent<Transform>();
     }
@@ -101,7 +101,7 @@ public class DummyStepPoolManager : MonoBehaviour
         {
             var step = stepQueue.Dequeue();
             step.transform.SetParent(null);
-            step.transform.position = new Vector3(pos.x, 0, pos.z);
+            step.transform.position = new Vector3(pos.x, pos.y - 1f, pos.z);
             step.transform.rotation = rot;
 
             step.gameObject.SetActive(true);
@@ -116,7 +116,7 @@ public class DummyStepPoolManager : MonoBehaviour
 
             newStep.gameObject.SetActive(true);
             newStep.transform.SetParent(null);
-            newStep.transform.position = new Vector3(pos.x, 0, pos.z);
+            newStep.transform.position = new Vector3(pos.x, pos.y - 1f, pos.z);
             newStep.transform.rotation = rot;
 
             newStep.OnStep();

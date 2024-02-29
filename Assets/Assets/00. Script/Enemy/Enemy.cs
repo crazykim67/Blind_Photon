@@ -7,6 +7,4 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private NavMeshAgent agent;
-
-
 }

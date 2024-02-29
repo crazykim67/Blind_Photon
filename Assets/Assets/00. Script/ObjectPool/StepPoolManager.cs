@@ -29,6 +29,9 @@ public class StepPoolManager : MonoBehaviour
     [SerializeField]
     private GameObject rightStep;
 
+    [SerializeField]
+    private int initCount;
+
     [Header("Player")]
     //[HideInInspector] 
     public Transform playerTr;
@@ -48,7 +51,7 @@ public class StepPoolManager : MonoBehaviour
     {
         instance = this;
 
-        Initialize(50);
+        Initialize(initCount);
         EnemyInitialize(10 * enemies.Count);
 
         //playerTr = FindFirstObjectByType<PlayerController>().GetComponent<Transform>();
@@ -140,7 +143,7 @@ public class StepPoolManager : MonoBehaviour
 
             newStep.gameObject.SetActive(true);
             newStep.transform.SetParent(null);
-            newStep.transform.position = new Vector3(pos.x, 0, pos.z);
+            newStep.transform.position = new Vector3(pos.x, pos.y - 1f, pos.z);
             newStep.transform.rotation = rot;
 
             newStep.OnStep();

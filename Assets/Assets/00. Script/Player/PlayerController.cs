@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
+public enum State
+{
+    Walk,
+    Run,
+}
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     public PhotonView pv;
     public CharacterController ch;
+    public HeadBobController hc;
 
-    public float speed = 5f;
+    public float speed = 1f;
     public float gravity = -9.8f; 
     //public float jumpHeight = 1f;
 
@@ -18,8 +25,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Vector3 moveDir = Vector3.zero;
 
-    [SerializeField]
     private float moveX, moveZ;
+
+    public State currentState = State.Walk;
 
     //[Header("Input Action")]
     //private Controls input = null;
@@ -46,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
         InputKey();
         Move();
+        InputSprint();
+        UpdateState();
     }
 
     //private void OnMove(InputAction.CallbackContext value)
@@ -85,9 +95,6 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        //moveX = Input.GetAxis("Horizontal");
-        //moveZ = Input.GetAxis("Vertical");
-
         if (ch.isGrounded)
             velocity.y = 0f;
 
@@ -101,5 +108,32 @@ public class PlayerController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         ch.Move(velocity * Time.deltaTime);
+    }
+
+    public void InputSprint()
+    {
+        if (Input.GetKeyDown(OptionManager.Instance.keyManager.SPRINT.currentKey))
+            currentState = State.Run;
+        else if (Input.GetKeyUp(OptionManager.Instance.keyManager.SPRINT.currentKey))
+            currentState = State.Walk;
+    }
+
+    public void UpdateState()
+    {
+        switch (currentState)
+        {
+            case State.Walk:
+                {
+                    speed = 1f;
+                    break;
+                }
+            case State.Run:
+                {
+                    speed = 3f;
+                    break;
+                }
+        }
+
+        hc.SetValue(currentState);
     }
 }

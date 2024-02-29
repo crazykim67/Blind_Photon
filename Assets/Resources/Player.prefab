@@ -155,11 +155,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pv: {fileID: 5622518125528099478}
   ch: {fileID: 8458923514097267739}
+  hc: {fileID: 4514814797944730688}
   speed: 1
   gravity: -9.8
   moveDir: {x: 0, y: 0, z: 0}
-  moveX: 0
-  moveZ: 0
+  currentState: 0
   nickName: 
 --- !u!114 &4514814797944730688
 MonoBehaviour:

@@ -4108,6 +4108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 100
   body: {fileID: 0}
+  xRotation: 0
   minClamp: -50
   maxClamp: 70
 --- !u!1 &3844402079603779587
@@ -4185,6 +4186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftStep: {fileID: 322513287373335263, guid: 329accdfd756159409b0ba8703094f13, type: 3}
   rightStep: {fileID: 1173669875665221716, guid: eab172e98033a4647be3021d7d07b3d0, type: 3}
+  initCount: 100
   playerTr: {fileID: 0}
   enemies: []
   enemyTr: {fileID: 3318326498121150961}

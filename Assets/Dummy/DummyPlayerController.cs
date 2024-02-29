@@ -7,6 +7,7 @@ using UnityEngine;
 public class DummyPlayerController : MonoBehaviour
 {
     public CharacterController ch;
+    public DummyHeadBobController dhc;
 
     public float speed = 5f;
     public float gravity = -9.8f;
@@ -19,6 +20,8 @@ public class DummyPlayerController : MonoBehaviour
 
     [SerializeField]
     private float moveX, moveZ;
+
+    public State currentState = State.Walk;
 
     //[Header("Input Action")]
     //private Controls input = null;
@@ -34,6 +37,8 @@ public class DummyPlayerController : MonoBehaviour
     {
         InputKey();
         Move();
+        InputSprint();
+        UpdateState();
     }
 
     private void InputKey()
@@ -77,5 +82,32 @@ public class DummyPlayerController : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         ch.Move(velocity * Time.deltaTime);
+    }
+
+    public void InputSprint()
+    {
+        if (Input.GetKeyDown(OptionManager.Instance.keyManager.SPRINT.currentKey))
+            currentState = State.Run;
+        else if (Input.GetKeyUp(OptionManager.Instance.keyManager.SPRINT.currentKey))
+            currentState = State.Walk;
+    }
+
+    public void UpdateState()
+    {
+        switch (currentState)
+        {
+            case State.Walk:
+                {
+                    speed = 1f;
+                    break;
+                }
+            case State.Run:
+                {
+                    speed = 3f;
+                    break;
+                }
+        }
+
+        dhc.SetValue(currentState);
     }
 }
